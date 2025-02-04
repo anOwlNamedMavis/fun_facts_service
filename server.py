@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, Response
 import random
 
 app = Flask(__name__)
@@ -16,7 +16,8 @@ fun_facts = load_facts()
 
 @app.route('/')
 def random_fact():
-    return random.choice(fun_facts), 200, {'Content-Type': 'text/plain'}
+    fact = random.choice(fun_facts)
+    return Response(fact, content_type="text/plain; charset=utf-8")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
